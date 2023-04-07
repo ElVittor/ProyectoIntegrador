@@ -10,7 +10,7 @@ class controladorBD:
     def conexionBD(self):
         try:
             conexion = sqlite3.connect(r'C:\Users\Edgar\OneDrive\Documentos\GitHub\ProyectoIntegrador\proyectopy\pollobusBD.db')
-            print('Conectado a la BD')
+            
             return conexion
         except sqlite3.OperationalError:
             print('No se puede conectar')
@@ -105,3 +105,28 @@ class controladorBD:
             print('Error de consulta')
             conx.close()
             
+    def consultaAlumno(self):
+        conx = self.conexionBD()
+        try:
+            cursor= conx.cursor()
+            sqlSelect = 'SELECT * FROM alumno'
+            cursor.execute(sqlSelect)
+            RSconsul= cursor.fetchall()
+            conx.close()
+            return RSconsul
+        except sqlite3.OperationalError:
+            print('Error de consulta')
+            conx.close()
+            
+    def consultaOperador(self):
+        conx = self.conexionBD()
+        try:
+            cursor= conx.cursor()
+            sqlSelect = 'SELECT * FROM operador'
+            cursor.execute(sqlSelect)
+            RSconsul= cursor.fetchall()
+            conx.close()
+            return RSconsul
+        except sqlite3.OperationalError:
+            print('Error de consulta')
+            conx.close()
