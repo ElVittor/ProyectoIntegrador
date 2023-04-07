@@ -91,4 +91,17 @@ class controladorBD:
         
         #Regresamos la contraseña encriptada
         return conHa
-        
+    
+    def consultaBus(self):
+        conx = self.conexionBD()
+        try:
+            cursor= conx.cursor()
+            sqlSelect = 'SELECT * FROM autobus'
+            cursor.execute(sqlSelect)
+            RSconsul= cursor.fetchall()
+            conx.close()
+            return RSconsul
+        except sqlite3.OperationalError:
+            print('Error de consulta')
+            conx.close()
+            
