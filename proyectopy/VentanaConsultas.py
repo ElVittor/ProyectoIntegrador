@@ -22,11 +22,17 @@ def consulOperador():
     tree2.delete(*tree2.get_children())
     for fila in consultarOperador:
         tree2.insert('',tk.END, values=fila)
+        
+def consulRuta():
+    consultarRuta = controlador.consultaRuta()
+    tree2.delete(*tree2.get_children())
+    for fila in consultarRuta:
+        tree2.insert('',tk.END, values=fila)
 
 
 ventana = Tk()
 ventana.title('CRUD de usuarios')
-ventana.geometry('500x300')
+ventana.geometry('1300x300')
 
 panel= ttk.Notebook(ventana)
 panel.pack(fill='both', expand='yes')
@@ -34,6 +40,7 @@ panel.pack(fill='both', expand='yes')
 pestana1= ttk.Frame(panel)
 pestana2= ttk.Frame(panel)
 pestana3= ttk.Frame(panel)
+pestana4= ttk.Frame(panel)
 
 titulo1 = Label(pestana1, text='Consultar Alumnos', fg = 'purple', font=('Modern', 18)).pack()
 tree1 = ttk.Treeview(pestana1, column=("c1", "c2", "c3", 'c4', 'c5','c6', 'c7', 'c8','c9'), show='headings')
@@ -121,8 +128,33 @@ tree.pack()
 
 btnConsul= Button(pestana3,text='Consultar', command=consulBus).pack()
 
+tituloru = Label(pestana4, text='Consultar Rutas', fg = 'purple', font=('Modern', 18)).pack()
+treeru = ttk.Treeview(pestana4, column=("c1", "c2", "c3", 'c4', 'c5','c6'), show='headings')
+
+treeru.column("#1", anchor=tk.CENTER)
+treeru.heading("#1", text="ID")
+
+treeru.column("#2", anchor=tk.CENTER)
+treeru.heading("#2", text="Operador")
+
+treeru.column("#3", anchor=tk.CENTER)
+treeru.heading("#3", text="Autobus")
+
+treeru.column("#4", anchor=tk.CENTER)
+treeru.heading("#4", text="Hr. Salida")
+
+treeru.column("#5", anchor=tk.CENTER)
+treeru.heading("#5", text="Hr. Llegada")
+
+treeru.column("#6", anchor=tk.CENTER)
+treeru.heading("#6", text="Paradas")
+treeru.pack()
+
+btnConsulru= Button(pestana4,text='Consultar', command=consulRuta).pack()
+
 panel.add(pestana1, text='Consultar alumnos')
 panel.add(pestana2, text='Consultar operador')
 panel.add(pestana3, text='Consultar autobus')
+panel.add(pestana4, text="Consultar Ruta")
 
 ventana.mainloop()

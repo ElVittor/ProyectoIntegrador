@@ -24,6 +24,8 @@ panel.pack(fill="both",expand="yes")
 
 pestaña4=ttk.Frame(panel)#pestaña 4 va al panel
 pestaña5=ttk.Frame(panel)
+pestaña6=ttk.Frame(panel)
+pestaña7=ttk.Frame(panel)
 
 titulo = Label(pestaña4, text='Editar Autobuses', fg = 'purple', font=('Modern', 18)).pack()
 #editBus(id,modelo,matricula,NoAsientos,capacidadTanque,marca):
@@ -61,8 +63,51 @@ lbID2=Label(pestaña5,text="ID del Usuario a Eliminar: ").pack()
 txtID2=Entry(pestaña5,textvariable=varID).pack()
 btnEliminar=Button(pestaña5,text="Eliminar Usuario",command=Execute_Delete_Bus).pack()#Usamos el ejecutar insert para guardar la información
 
+#Editar eliminar operador
+
+titulo = Label(pestaña6, text='Editar Operador', fg = 'purple', font=('Modern', 18)).pack()
+#editBus(id,modelo,matricula,NoAsientos,capacidadTanque,marca):
+
+varIDO=tk.StringVar()#para vaciar el Entry
+lblIDO=Label(pestaña6,text="ID Operador a Editar: ").pack()
+txtID==Entry(pestaña6,textvariable=varIDO).pack() #text variable te pide la variable donde va aguardar
+
+varnombre=tk.StringVar()#para vaciar el Entry
+lblmodeloO=Label(pestaña6,text="Nombre: ").pack()
+txtmodeloO=Entry(pestaña6,textvariable=varnombre).pack() #text variable te pide la variable donde va aguardar
+
+varap=tk.StringVar()#para vaciar el Entry
+lblCor2O=Label(pestaña6,text="Apellido Paterno: ").pack()
+txtCor2O=Entry(pestaña6,textvariable=varap).pack() #text variable te pide la variable donde va aguardar
+
+varam=tk.StringVar()#para vaciar el Entry
+lblCon2O=Label(pestaña6,text="Apellido Materno: ").pack()
+txtCon2O=Entry(pestaña6,textvariable=varam).pack() #text variable te pide la variable donde va aguardar
+
+varNumEmpleado=tk.StringVar()#para vaciar el Entry
+lbltanO=Label(pestaña6,text="Número de empleado: ").pack()
+txttanO=Entry(pestaña6,textvariable=varNumEmpleado).pack()
+
+varlicenica=tk.StringVar()#para vaciar el Entry
+lblNom2O=Label(pestaña6,text="Licencia: ").pack()
+txtNom2O=Entry(pestaña6,textvariable=varlicenica).pack()
+
+varvigencia=tk.StringVar()#para vaciar el Entry
+lblNom2O=Label(pestaña6,text="Vigencia: ").pack()
+txtNom2O=Entry(pestaña6,textvariable=varvigencia).pack()
+
+btnEditarO=Button(pestaña4,text="Editar Usuario",command=ejecutaactualizarusuario).pack()#Usamos el ejecutar insert para guardar la información
+
+#Eliminar
+varIDEO=tk.StringVar()#para vaciar el Entry
+tituloEO=Label(pestaña7,text="Eliminar Operador",fg="blue",font=("Modern",18)).pack() #posicionamos un titulo en una etiqueta, en pestaña 1, con texto, color de letra, tipo de fuente y tamaño, colocandolo con el pack
+lbID2EO=Label(pestaña7,text="ID del Operador a Eliminar: ").pack()
+txtID2EO=Entry(pestaña7,textvariable=varID).pack()
+btnEliminarEO=Button(pestaña7,text="Eliminar Operador",command=Execute_Delete_Bus).pack()
 
 panel.add(pestaña4, text='Editar usuarios')
 panel.add(pestaña5, text='Eliminar usuarios')
+panel.add(pestaña6, text='Editar Operador')
+panel.add(pestaña7, text='Eliminar Operador')
 
 ventana.mainloop()
