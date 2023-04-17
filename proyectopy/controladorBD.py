@@ -9,7 +9,7 @@ class controladorBD:
     
     def conexionBD(self):
         try:
-            conexion = sqlite3.connect(r'C:/Users/leon_/Documents/UPQ/5° Cuatri/PROGRMACIÓN OO/ProyectoIntegrador/proyectopy/pollobusBD.db.sql')
+            conexion = sqlite3.connect(r'C:/Users/leon_/Documents/UPQ/5° Cuatri/PROGRMACIÓN OO/ProyectoIntegrador/proyectopy/pollobusBD.db')
             
             return conexion
         except sqlite3.OperationalError:
@@ -189,36 +189,24 @@ class controladorBD:
                 print("Error de Consulta")
                 
     #-------
-    def editOper(self,ap,am,numEmp,licencia,vigencia,nombre):
+    def editOper(self,id,ap,am,numEmp,licencia,vigencia,nombre):
         #1 realizar conxión, y establecer cursor y accion
         conx=self.conexionBD() #Para acceder a la funcion conexion
         cursor=conx.cursor()
-        sqlEdit="update operador set nombre=?,apellidoP=?,apellidoM=?,NumEmpleado=?,licencia=?, vigencia=? where id_operador=?"
-        if (nombre == '' or ap == '' or am == '' or numEmp == '' or licencia == '' or vigencia == ''):
+        sqlEdit="update operador set apellidoP=?,apellidoM=?,NumEmpleado=?,licencia=?, vigencia=?, nombre=? where id_operador=?"
+        if (nombre == '' or ap == '' or am == '' or numEmp == '' or licencia == '' or vigencia == '' or id == ""):
             messagebox.showwarning('Aguas!!', 'Formulario incompleto')
             conx.close()
-        else:
-            #3. Realizar el insert a la BD
-            #4. Preparamos las variables necesarias
-            cursor= conx.cursor()
-            datos=(ap,am,numEmp,licencia,vigencia,nombre)
-            sqlInsert=' insert into operador(apellidoP, apellidoM,NumEmpleado, licencia,vigencia,nombre) values(?,?,?,?,?,?)'
-            
-            #5. Ejecutamos el insert
-            cursor.execute(sqlInsert, datos)
-            conx.commit()
-            conx.close()
-            messagebox.showinfo("Exito", 'Usuario guardado')
         else:#Ahora si realizamos el inser a la base de datos
             try:
                 #crear una lista para evitar errores de sintxis con los para metros que insertaremos
-                datosOperador=(nombre,ap,am,numEmp,licencia,vigencia)#Usamos el conh para guaradar la contraseña encriptada
+                datosOperador=(ap,am,numEmp,licencia,vigencia,nombre,id)#Usamos el conh para guaradar la contraseña encriptada
                 #creamos la sintaxis sql para hacer el insert(lenguaje de sql).
                 #5 ejecutar insert
                 cursor.execute(sqlEdit,datosOperador)#le pedimos al cursor ejecutar el insert con los datos guardados en la variable datos(antes definida)
                 conx.commit()#Esta funcion se usa para guardar la informacion en la base datos, la informacion proporcionadapor el cursor
                 conx.close
-                messagebox.showinfo("Exito","Usuario guardado")
+                messagebox.showinfo("Exito","Operador guardado")
             except sqlite3.OperationalError:
                 print("Error de Actualizacion")
                 messagebox.showwarning("Cuidado","Error de Actualizacion")
@@ -228,7 +216,7 @@ class controladorBD:
         pass
         conx=self.conexionBD() #Para acceder a la funcion conexion
         cursor=conx.cursor()
-        sqldelete="DELETE FROM autobus WHERE id_autobus=?"
+        sqldelete="DELETE FROM operador WHERE id_operador="+id
         
         if(id==""):
                 messagebox.showwarning("Cuidado","Escribe un Identificdor")
@@ -237,9 +225,9 @@ class controladorBD:
                 #3 ejecutar la consulta
             try:
                     #4Preparamos lo necesario
-                cursor.execute(sqldelete,id)#Ejecuta sqlSelecct
+                cursor.execute(sqldelete)#Ejecuta sqlSelecct
                 conx.commit()
                 conx.close()
-                messagebox.showinfo("Correcto","Usuario Eliminado")
+                messagebox.showinfo("Correcto","Operador Eliminado")
             except sqlite3.OperationalError:
                 print("Error de Consulta")

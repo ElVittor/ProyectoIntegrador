@@ -15,6 +15,16 @@ def ejecutaactualizarusuario():
     if RespYesNo==True:
         controlador.editBus(varID.get(),varmodelo.get(),varmatricula.get(),varasientos.get(),varcaptanq.get(),varmarca.get())
 
+def ejecutaactalizaroperador():
+    RespYesNo=messagebox.askyesno("Actualizar",message=f"Desea actualizar el siguiente Operador: \nID: {varIDO.get()}\nNombre: {varnombre.get()}\nApellido Paterno: {varap.get()}\nApellido Materno: {varam.get()}\nNumero de empleado: {varNumEmpleado.get()}\nLicencia: {varlicenica.get()}\nVigencia: {varvigencia.get()}")
+    if RespYesNo==True:
+        controlador.editOper(varIDO.get(),varap.get(),varam.get(),varNumEmpleado.get(),varlicenica.get(),varvigencia.get(),varnombre.get())
+
+def ejecutaeliminaroperador():
+    RSDelete=messagebox.askyesno("Confirmación de Accion: Eliminar",message=f"Desea eliminar el Operador\nID: {varIDEO.get()}")
+    if(RSDelete==True):
+        controlador.DeleteBus(varIDEO.get())
+        
 ventana=Tk()
 ventana.title("CRUD de Edicion y Eliminacion de Autobuses")
 ventana.geometry("500x300")
@@ -96,14 +106,14 @@ varvigencia=tk.StringVar()#para vaciar el Entry
 lblNom2O=Label(pestaña6,text="Vigencia: ").pack()
 txtNom2O=Entry(pestaña6,textvariable=varvigencia).pack()
 
-btnEditarO=Button(pestaña4,text="Editar Usuario",command=ejecutaactualizarusuario).pack()#Usamos el ejecutar insert para guardar la información
+btnEditarO=Button(pestaña6,text="Editar Usuario",command=ejecutaactalizaroperador).pack()#Usamos el ejecutar insert para guardar la información
 
 #Eliminar
 varIDEO=tk.StringVar()#para vaciar el Entry
 tituloEO=Label(pestaña7,text="Eliminar Operador",fg="blue",font=("Modern",18)).pack() #posicionamos un titulo en una etiqueta, en pestaña 1, con texto, color de letra, tipo de fuente y tamaño, colocandolo con el pack
 lbID2EO=Label(pestaña7,text="ID del Operador a Eliminar: ").pack()
-txtID2EO=Entry(pestaña7,textvariable=varID).pack()
-btnEliminarEO=Button(pestaña7,text="Eliminar Operador",command=Execute_Delete_Bus).pack()
+txtID2EO=Entry(pestaña7,textvariable=varIDEO).pack()
+btnEliminarEO=Button(pestaña7,text="Eliminar Operador",command=ejecutaeliminaroperador).pack()
 
 panel.add(pestaña4, text='Editar usuarios')
 panel.add(pestaña5, text='Eliminar usuarios')
